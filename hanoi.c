@@ -3,19 +3,34 @@
 
 void hanoi(unsigned, unsigned, unsigned);
 
-static unsigned moves;
+static unsigned moves; /* we'll keep track of how many moves it takes */
 
-void hanoi(unsigned n, unsigned from, unsigned to)
+
+/* Move a tower of n disks from origin peg to destination peg */
+void hanoi(unsigned n, unsigned orig, unsigned dest)
 {
-   unsigned other = 6 - from - to;  /* the spare  peg */
+   unsigned inter = 6 - orig - dest;  /* the intermediate  peg */
    moves++;
 
+/* Our strategy here is to get to the bottom disk of a tower 
+   on n disks by moving n-1 disks above it out of the way so
+   we can move the bottom disk from the origin peg to the 
+   destination peg, after which we need to move the n-1 disks
+   from the intermedite peg to the destintion peg. If there is
+   only 1 disk to move, we can move it immediately from origin
+   to destination.
+
+   Since we can move only one disk at a time, we'll have to move the
+   n-1 disks using the same procedure called recursively.
+*/   
+
+
    if(n == 1) 
-      printf("Top disk on peg %u => peg %u\n", from, to);
+      printf("Top disk on peg %u => peg %u\n", orig, dest);
    else {
-      hanoi(n-1, from, other);
-      printf("Top disk on peg %u => peg %u\n", from, to);
-      hanoi(n-1, other, to);
+      hanoi(n-1, orig, inter);
+      printf("Top disk on peg %u => peg %u\n", orig, dest);
+      hanoi(n-1, inter, dest);
    }
 }
        
