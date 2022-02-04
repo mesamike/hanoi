@@ -13,7 +13,7 @@ void hanoi(unsigned n, unsigned orig, unsigned dest)
    moves++;
 
 /* Our strategy here is to get to the bottom disk of a tower 
-   on n disks by moving n-1 disks above it out of the way so
+   of n disks by moving n-1 disks above it out of the way so
    we can move the bottom disk from the origin peg to the 
    destination peg, after which we need to move the n-1 disks
    from the intermedite peg to the destintion peg. If there is
